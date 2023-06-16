@@ -49,22 +49,25 @@ public class BlogController {
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") Long id) {
+	public ModelAndView delete(@PathVariable("id") Long id) {
 		blogService.delete(id);
+		ModelAndView mv = getPosts();
+		mv.setViewName("redirect:/posts");
 
-		return "redirect:/posts";
+		return mv;
 	}
-	
+
 	@GetMapping("/edit/{id}")
 	public ModelAndView Edit(@PathVariable("id") Long id, Model model) {
 		PostModel post = blogService.findById(id);
-		
+
 		model.addAttribute("postModel", post);
 
 		ModelAndView mv = new ModelAndView("postForm");
 		return mv;
+
 	}
-	
+
 	@PostMapping("/edit/{id}")
 	public ModelAndView savePostEdited(@Valid @ModelAttribute("postModel") PostModel post, BindingResult result) {
 		return savePost(post, result);
