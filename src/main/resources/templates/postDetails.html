@@ -12,7 +12,8 @@
     <header>
         <nav class="navbar navbar-light bg-light">
             <span class="navbar-brand mb-0 h1" style="font-weight: bold;">MyCodeBlog</span>
-            <a th:href="@{/delete/{id} (id=${post.id})}" class="btn btn-danger" role="button">Delete</a>
+            <a th:href="@{/delete/{id} (id=${post.id})}" class="btn  btn-danger"  role="button">Delete</a>
+            <a th:href="@{/edit/{id} (id=${post.id})}" class="btn btn-info"  role="button">Editar</a>
         </nav>
 
     </header>

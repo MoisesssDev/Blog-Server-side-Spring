@@ -54,6 +54,21 @@ public class BlogController {
 
 		return "redirect:/posts";
 	}
+	
+	@GetMapping("/edit/{id}")
+	public ModelAndView Edit(@PathVariable("id") Long id, Model model) {
+		PostModel post = blogService.findById(id);
+		
+		model.addAttribute("postModel", post);
+
+		ModelAndView mv = new ModelAndView("postForm");
+		return mv;
+	}
+	
+	@PostMapping("/edit/{id}")
+	public ModelAndView savePostEdited(@Valid @ModelAttribute("postModel") PostModel post, BindingResult result) {
+		return savePost(post, result);
+	}
 
 	@PostMapping("/newpost")
 	public ModelAndView savePost(@Valid @ModelAttribute("postModel") PostModel post, BindingResult result) {
